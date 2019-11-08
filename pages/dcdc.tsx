@@ -10,8 +10,20 @@ type UnitFieldValue = InvalidUnitFieldValue | ValidUnitFieldValue
 
 function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
   try {
-    const parsedUnit = mathjs.evaluate(input).to(acceptedUnit)
-    return new ValidUnitFieldValue(input, parsedUnit)
+    const parsedUnit = mathjs.evaluate(input)
+    if (parsedUnit == null) {
+      return new InvalidUnitFieldValue(input, "Missing value")
+    }
+
+    if (typeof parsedUnit === "number") {
+      if (acceptedUnit !== "") {
+        return new InvalidUnitFieldValue(input,
+          `Got unit-less value when '${acceptedUnit}' was expected`)
+      }
+      return new ValidUnitFieldValue(input, parsedUnit)
+    }
+
+    return new ValidUnitFieldValue(input, parsedUnit.to(acceptedUnit))
   } catch (error) {
     return new InvalidUnitFieldValue(input, error.message)
   }
@@ -23,7 +35,7 @@ class InvalidUnitFieldValue {
 }
 
 class ValidUnitFieldValue {
-  constructor(public readonly textValue: string, public readonly value: mathjs.Unit) { }
+  constructor(public readonly textValue: string, public readonly value: number | mathjs.Unit) { }
   isError(): boolean { return false }
 }
 
@@ -160,6 +172,10 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
       <ResultField
         label="Peak Inductor Current"
         equation={`(max_v_in * (${max_duty_eq})) / (freq * (${min_inductor_size}))`}
+        scope={scope} />
+      <ResultField
+        label="Minimum Capacitor"
+        equation="min_i_out / (max_v_pkpk * freq)"
         scope={scope} />
     </Grid>
   </Layout>
