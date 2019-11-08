@@ -12,50 +12,54 @@ function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
   try {
     const parsedUnit = mathjs.evaluate(input)
     if (parsedUnit == null) {
-      return new InvalidUnitFieldValue(input, "Missing value")
+      return new InvalidUnitFieldValue(input, acceptedUnit, "Missing value")
     }
 
     if (typeof parsedUnit === "number") {
       if (acceptedUnit !== "") {
-        return new InvalidUnitFieldValue(input,
+        return new InvalidUnitFieldValue(input, acceptedUnit,
           `Got unit-less value when '${acceptedUnit}' was expected`)
       }
-      return new ValidUnitFieldValue(input, parsedUnit)
+      return new ValidUnitFieldValue(input, acceptedUnit, parsedUnit)
     }
 
-    return new ValidUnitFieldValue(input, parsedUnit.to(acceptedUnit))
+    return new ValidUnitFieldValue(input, acceptedUnit, parsedUnit.to(acceptedUnit))
   } catch (error) {
-    return new InvalidUnitFieldValue(input, error.message)
+    return new InvalidUnitFieldValue(input, acceptedUnit, error.message)
   }
 }
 
 class InvalidUnitFieldValue {
-  constructor(public readonly textValue: string, public readonly error: string) { }
+  constructor(
+    public readonly textValue: string,
+    public readonly acceptedUnit: string,
+    public readonly error: string) { }
   isError(): boolean { return true }
 }
 
 class ValidUnitFieldValue {
-  constructor(public readonly textValue: string, public readonly value: number | mathjs.Unit) { }
+  constructor(
+    public readonly textValue: string,
+    public readonly acceptedUnit: string,
+    public readonly value: number | mathjs.Unit) { }
   isError(): boolean { return false }
 }
 
 const CalculatorField: React.FunctionComponent<{
   label: ReactElement,
   name: string,
-  acceptedUnit: string,
-
   scope: { [name: string]: UnitFieldValue },
   setScope: React.Dispatch<React.SetStateAction<any>>
-}> = ({ label, name, acceptedUnit, scope, setScope }) => {
+}> = ({ label, name, scope, setScope }) => {
   const fieldValue = scope[name]
   const isError = fieldValue.isError()
 
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useMemo(() => (event) => {
     setScope({
       ...scope,
-      [name]: parseInput(event.target.value, acceptedUnit)
+      [name]: parseInput(event.target.value, scope[name].acceptedUnit)
     })
-  }, [setScope, scope, acceptedUnit])
+  }, [setScope, scope])
 
   return (
     <React.Fragment>
@@ -129,31 +133,31 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
       <CalculatorField
         label={<span>Frequency</span>}
         name="freq"
-        acceptedUnit='Hz' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Max V<sub>in</sub></span>}
         name="max_v_in"
-        acceptedUnit='V' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Min V<sub>in</sub></span>}
         name="min_v_in"
-        acceptedUnit='V' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Max V<sub>out</sub></span>}
         name="max_v_out"
-        acceptedUnit='V' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Min V<sub>out</sub></span>}
         name="min_v_out"
-        acceptedUnit='V' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Min I<sub>out</sub></span>}
         name="min_i_out"
-        acceptedUnit='A' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
       <CalculatorField
         label={<span>Max V<sub>pk-pk</sub></span>}
         name="max_v_pkpk"
-        acceptedUnit='V' scope={scope} setScope={setScope} />
+        scope={scope} setScope={setScope} />
     </Grid>
     <h2>Results</h2>
     <Grid container>
