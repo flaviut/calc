@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { default as RouterLink } from 'next/link'
+import RouterLink from 'next/link'
 import Head from 'next/head'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
@@ -27,17 +27,17 @@ const Layout: React.FunctionComponent<Props> = ({
           <Toolbar>
             <RouterLink href="/"><Button color="inherit">Home</Button></RouterLink>
             <RouterLink href="/about"><Button color="inherit">About</Button></RouterLink>
-            <RouterLink href="/users"><Button color="inherit">Users List</Button></RouterLink>
             <RouterLink href="/dcdc"><Button color="inherit">DC-DC Converter Calculator</Button></RouterLink>
           </Toolbar>
         </AppBar>
 
         {children}
+        
+        <footer>
+          <hr />
+          <span>I'm here to stay (Footer)</span>
+        </footer>
       </Container>
-      <footer>
-        <hr />
-        <span>I'm here to stay (Footer)</span>
-      </footer>
     </React.Fragment>
   )
 

@@ -3,8 +3,8 @@
 // example, to import the interface below do:
 //
 // import User from 'path/to/interfaces';
-
-export type User = {
-  id: number
-  name: string
-}
+// 
+// export type User = {
+//   id: number
+//   name: string
+// }
