@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
 
 type Props = {
   title?: string
@@ -31,8 +32,13 @@ const Layout: React.FunctionComponent<Props> = ({
           </Toolbar>
         </AppBar>
 
-        {children}
-        
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <h1>{title}</h1>
+          </Grid>
+          {children}
+        </Grid>
+
         <footer>
           <hr />
           <span>I'm here to stay (Footer)</span>

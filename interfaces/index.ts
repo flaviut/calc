@@ -9,4 +9,22 @@
 //   name: string
 // }
 
-export type Dummy = undefined
+import * as mathjs from 'mathjs'
+
+export type UnitFieldValue = InvalidUnitFieldValue | ValidUnitFieldValue
+
+export class InvalidUnitFieldValue {
+    constructor(
+        public readonly textValue: string,
+        public readonly acceptedUnit: string,
+        public readonly error: string) { }
+    isError(): boolean { return true }
+}
+
+export class ValidUnitFieldValue {
+    constructor(
+        public readonly textValue: string,
+        public readonly acceptedUnit: string,
+        public readonly value: number | mathjs.Unit) { }
+    isError(): boolean { return false }
+}

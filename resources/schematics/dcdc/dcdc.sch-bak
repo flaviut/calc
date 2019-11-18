@@ -1,0 +1,256 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:D D
+U 1 1 5DD1F329
+P 1550 1650
+F 0 "D" H 1550 1526 50  0000 C CNN
+F 1 "D" V 1595 1729 50  0001 L CNN
+F 2 "" H 1550 1650 50  0001 C CNN
+F 3 "~" H 1550 1650 50  0001 C CNN
+	1    1550 1650
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD21008
+P 650 2050
+F 0 "#PWR?" H 650 1800 50  0001 C CNN
+F 1 "GND" H 655 1877 50  0001 C CNN
+F 2 "" H 650 2050 50  0001 C CNN
+F 3 "" H 650 2050 50  0001 C CNN
+	1    650  2050
+	1    0    0    -1  
+$EndComp
+Text Label 900  1850 0    50   ~ 0
+PWM
+$Comp
+L Device:C Co
+U 1 1 5DD2193F
+P 1850 1850
+F 0 "Co" H 1965 1850 50  0000 L CNN
+F 1 "C" H 1965 1805 50  0001 L CNN
+F 2 "" H 1888 1700 50  0001 C CNN
+F 3 "~" H 1850 1850 50  0001 C CNN
+	1    1850 1850
+	1    0    0    -1  
+$EndComp
+Connection ~ 1250 2050
+$Comp
+L power:+12V Vin
+U 1 1 5DD22B7E
+P 650 1600
+F 0 "Vin" H 650 1750 50  0000 C CNN
+F 1 "+12V" H 665 1773 50  0001 C CNN
+F 2 "" H 650 1600 50  0001 C CNN
+F 3 "" H 650 1600 50  0001 C CNN
+	1    650  1600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	900  1850 950  1850
+$Comp
+L Device:C Ci
+U 1 1 5DD2428C
+P 650 1850
+F 0 "Ci" H 765 1850 50  0000 L CNN
+F 1 "C" H 765 1805 50  0001 L CNN
+F 2 "" H 688 1700 50  0001 C CNN
+F 3 "~" H 650 1850 50  0001 C CNN
+	1    650  1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1250 2050 1850 2050
+$Comp
+L Device:Q_NMOS_DGS Q
+U 1 1 5DD201DE
+P 1150 1850
+F 0 "Q" H 1356 1850 50  0000 L CNN
+F 1 "Q_NMOS_DGS" H 1356 1805 50  0001 L CNN
+F 2 "" H 1350 1950 50  0001 C CNN
+F 3 "~" H 1150 1850 50  0001 C CNN
+	1    1150 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L
+U 1 1 5DD1EBC5
+P 950 1650
+F 0 "L" V 1049 1650 50  0000 C CNN
+F 1 "L" V 1049 1650 50  0001 C CNN
+F 2 "" H 950 1650 50  0001 C CNN
+F 3 "~" H 950 1650 50  0001 C CNN
+	1    950  1650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	650  2050 1250 2050
+Wire Wire Line
+	650  1650 800  1650
+Wire Wire Line
+	1100 1650 1250 1650
+Wire Wire Line
+	1250 1650 1400 1650
+Connection ~ 1250 1650
+Wire Wire Line
+	1700 1650 1850 1650
+Wire Wire Line
+	650  1700 650  1650
+Wire Wire Line
+	650  2000 650  2050
+Connection ~ 650  2050
+Wire Wire Line
+	1850 1700 1850 1650
+Wire Wire Line
+	1850 2000 1850 2050
+Wire Wire Line
+	650  1650 650  1600
+Connection ~ 650  1650
+$Comp
+L Device:D D
+U 1 1 5DD3611A
+P 1600 1000
+F 0 "D" V 1600 1100 50  0000 C CNN
+F 1 "D" V 1645 1079 50  0001 L CNN
+F 2 "" H 1600 1000 50  0001 C CNN
+F 3 "~" H 1600 1000 50  0001 C CNN
+	1    1600 1000
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5DD36120
+P 650 1200
+F 0 "#PWR?" H 650 950 50  0001 C CNN
+F 1 "GND" H 655 1027 50  0001 C CNN
+F 2 "" H 650 1200 50  0001 C CNN
+F 3 "" H 650 1200 50  0001 C CNN
+	1    650  1200
+	1    0    0    -1  
+$EndComp
+Text Label 1000 1150 2    50   ~ 0
+PWM
+$Comp
+L Device:C Co
+U 1 1 5DD36127
+P 1850 1000
+F 0 "Co" H 1965 1000 50  0000 L CNN
+F 1 "C" H 1965 955 50  0001 L CNN
+F 2 "" H 1888 850 50  0001 C CNN
+F 3 "~" H 1850 1000 50  0001 C CNN
+	1    1850 1000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1000 1150 1000 1100
+$Comp
+L Device:C Ci
+U 1 1 5DD36135
+P 650 1000
+F 0 "Ci" H 765 1000 50  0000 L CNN
+F 1 "C" H 765 955 50  0001 L CNN
+F 2 "" H 688 850 50  0001 C CNN
+F 3 "~" H 650 1000 50  0001 C CNN
+	1    650  1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_NMOS_DGS Q
+U 1 1 5DD3613C
+P 1000 900
+F 0 "Q" V 1250 900 50  0000 C CNN
+F 1 "Q_NMOS_DGS" H 1206 855 50  0001 L CNN
+F 2 "" H 1200 1000 50  0001 C CNN
+F 3 "~" H 1000 900 50  0001 C CNN
+	1    1000 900 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L L
+U 1 1 5DD36142
+P 1400 800
+F 0 "L" V 1499 800 50  0000 C CNN
+F 1 "L" V 1499 800 50  0001 C CNN
+F 2 "" H 1400 800 50  0001 C CNN
+F 3 "~" H 1400 800 50  0001 C CNN
+	1    1400 800 
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	650  800  800  800 
+Wire Wire Line
+	650  850  650  800 
+Wire Wire Line
+	650  1150 650  1200
+Connection ~ 650  1200
+Wire Wire Line
+	1850 850  1850 800 
+Wire Wire Line
+	1850 1150 1850 1200
+Wire Wire Line
+	650  800  650  750 
+Connection ~ 650  800 
+Wire Wire Line
+	650  1200 1600 1200
+Wire Wire Line
+	1600 850  1600 800 
+Wire Wire Line
+	1600 1150 1600 1200
+Wire Wire Line
+	1250 800  1200 800 
+$Comp
+L power:+12V Vin
+U 1 1 5DD3D929
+P 650 750
+F 0 "Vin" H 650 900 50  0000 C CNN
+F 1 "+12V" H 665 923 50  0001 C CNN
+F 2 "" H 650 750 50  0001 C CNN
+F 3 "" H 650 750 50  0001 C CNN
+	1    650  750 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V Vout
+U 1 1 5DD3E67E
+P 1850 1650
+F 0 "Vout" H 1850 1800 50  0000 C CNN
+F 1 "+12V" H 1865 1823 50  0001 C CNN
+F 2 "" H 1850 1650 50  0001 C CNN
+F 3 "" H 1850 1650 50  0001 C CNN
+	1    1850 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V Vout
+U 1 1 5DD3EB2A
+P 1850 800
+F 0 "Vout" H 1850 950 50  0000 C CNN
+F 1 "+12V" H 1865 973 50  0001 C CNN
+F 2 "" H 1850 800 50  0001 C CNN
+F 3 "" H 1850 800 50  0001 C CNN
+	1    1850 800 
+	1    0    0    -1  
+$EndComp
+Connection ~ 1600 800 
+Wire Wire Line
+	1600 800  1550 800 
+Connection ~ 1600 1200
+Wire Wire Line
+	1600 800  1850 800 
+Wire Wire Line
+	1600 1200 1850 1200
+$EndSCHEMATC
