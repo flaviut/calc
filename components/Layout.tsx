@@ -40,8 +40,12 @@ const Layout: React.FunctionComponent<Props> = ({
         </Grid>
 
         <footer>
-          <div style={{textAlign: "center"}}>---</div>
-          <div style={{textAlign: "center"}}>© 2019 Flaviu Tamas, CC-BY-SA or Apache 2</div>
+          <div style={{ textAlign: "center" }}>---</div>
+          <div style={{ textAlign: "center" }}>
+            © 2019 Flaviu Tamas,{" "}
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC-4.0-BY</a> or{" "}
+            <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="license">Apache 2.0</a>
+          </div>
         </footer>
       </Container>
     </React.Fragment>
