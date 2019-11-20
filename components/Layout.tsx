@@ -40,8 +40,8 @@ const Layout: React.FunctionComponent<Props> = ({
         </Grid>
 
         <footer>
-          <hr />
-          <span>I'm here to stay (Footer)</span>
+          <div style={{textAlign: "center"}}>---</div>
+          <div style={{textAlign: "center"}}>© 2019 Flaviu Tamas, CC-BY-SA or Apache 2</div>
         </footer>
       </Container>
     </React.Fragment>
