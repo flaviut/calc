@@ -1,9 +1,17 @@
 import { ReactElement, useMemo } from "react"
 import * as mathjs from 'mathjs'
 import React from "react"
-import { Grid, TextField } from "@material-ui/core"
+import { Grid, TextField, makeStyles, Theme, createStyles } from "@material-ui/core"
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue } from "../interfaces"
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        textField: {
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1),
+        },
+    }),
+);
 
 export function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
     try {
@@ -28,12 +36,15 @@ export function parseInput(input: string, acceptedUnit: string): UnitFieldValue 
 
 export const CalculatorInputField: React.FunctionComponent<{
     label: ReactElement | string | Array<ReactElement | string>,
+    desc?: ReactElement | string | Array<ReactElement | string>,
     name: string,
     scope: { [name: string]: UnitFieldValue },
     setScope: React.Dispatch<React.SetStateAction<any>>
-}> = ({ label, name, scope, setScope }) => {
+}> = ({ label, name, desc, scope, setScope }) => {
     const fieldValue = scope[name]
     const isError = fieldValue.isError()
+
+    const classes = useStyles();
 
     const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useMemo(() => (event) => {
         setScope({
@@ -42,15 +53,19 @@ export const CalculatorInputField: React.FunctionComponent<{
         })
     }, [setScope, scope])
 
+    const helpText = isError ?
+        (fieldValue as InvalidUnitFieldValue).error :
+        desc
+
     return (
-        <React.Fragment>
-            <Grid item xs={6} sm={4}>{label}</Grid>
-            <Grid item xs={6} sm={8}>
-                <TextField
-                    error={isError}
-                    helperText={isError ? (fieldValue as InvalidUnitFieldValue).error : ""}
-                    value={fieldValue.textValue}
-                    onChange={onChangeHandler} />
-            </Grid>
-        </React.Fragment>)
+        <Grid item xs={12}>
+            <TextField
+                className={classes.textField}
+                fullWidth
+                error={isError}
+                label={label}
+                helperText={helpText}
+                value={fieldValue.textValue}
+                onChange={onChangeHandler} />
+        </Grid>)
 }

@@ -1,11 +1,11 @@
 import * as mathjs from 'mathjs'
-import React from "react"
+import React, { ReactElement } from "react"
 import { Grid } from "@material-ui/core"
 
 import { ValidUnitFieldValue, UnitFieldValue } from "../interfaces"
 
 export const CalculatorResultField: React.FunctionComponent<{
-    label: string,
+    label: ReactElement | string | Array<ReactElement | string>,
     equation: string,
     scope: { [name: string]: UnitFieldValue },
     equations?: { [name: string]: string },

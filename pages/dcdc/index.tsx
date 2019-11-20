@@ -1,15 +1,17 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import Grid from '@material-ui/core/Grid'
 import Layout from '../../components/Layout'
 import { parseInput, CalculatorInputField } from '../../components/CalculatorInputField'
 import { CalculatorResultField } from '../../components/CalculatorResultField'
+import { CalculatorHelpBase } from '../../components/CalculatorHelpBase'
 
 
 
 const DcDcCalculatorPage: React.FunctionComponent = () => {
     const [scope, setScope] = useState({
         freq: parseInput("100 kHz", "Hz"),
+        eff: parseInput("0.8", ""),
         max_v_in: parseInput("12 V", "V"),
         min_v_in: parseInput("5 V", "V"),
         max_v_out: parseInput("24 V", "V"),
@@ -25,44 +27,56 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
     return <Layout title="Boost Converter Calculator">
         <Grid container item sm={6} xs={12}>
             <Grid item xs={12}>
-                <img src={require("./boost.svg")} />
+                <img src={require("./boost.svg")}
+                    alt="Circuit diagram of a boost converter" />
             </Grid>
             <Grid item xs={12}>
-                <p>This calculator provides assistance when designing a boost regulator.</p>
-                <p>Some reasonable defaults have been entered, but you should replace these values with your own design parameters.</p>
-                <p>You may use expressions or alternative units. For example "2000 / (1 day)" will be interpreted to be about "23 mHz". </p>
+                <p> This calculator provides assistance when designing a boost
+                    regulator. The equations here are derived from&nbsp;
+                    <a href="https://www.ti.com/lit/an/slva372c/slva372c.pdf">
+                        TI's "Basic Calculation of a Boost Converter's Power
+                        Stage", SLVA372C</a>.
+                </p>
+                <CalculatorHelpBase />
             </Grid>
         </Grid>
         <Grid container item sm={6} xs={12}>
-            <Grid item xs={12}>
-                <h2>Inputs</h2>
-            </Grid>
+            <Grid item xs={12}><h2>Inputs</h2></Grid>
             <CalculatorInputField
-                label="Frequency"
+                label="Frequency (f)"
                 name="freq"
                 scope={scope} setScope={setScope} />
             <CalculatorInputField
-                label={["Max V", <sub>in</sub>]}
+                label="Efficiency (η)"
+                desc="Estimated efficiency of the converter"
+                name="eff"
+                scope={scope} setScope={setScope} />
+
+            <Grid item xs={12}><h3>Input Parameters</h3></Grid>
+            <CalculatorInputField
+                label={<Fragment>Max V<sub>in</sub></Fragment>}
                 name="max_v_in"
                 scope={scope} setScope={setScope} />
             <CalculatorInputField
-                label={["Min V", <sub>in</sub>]}
+                label={<Fragment>Min V<sub>in</sub></Fragment>}
                 name="min_v_in"
                 scope={scope} setScope={setScope} />
+
+            <Grid item xs={12}><h3>Output Parameters</h3></Grid>
             <CalculatorInputField
-                label={["Max V", <sub>out</sub>]}
+                label={<Fragment>Max V<sub>out</sub></Fragment>}
                 name="max_v_out"
                 scope={scope} setScope={setScope} />
             <CalculatorInputField
-                label={["Min V", <sub>out</sub>]}
+                label={<Fragment>Min V<sub>out</sub></Fragment>}
                 name="min_v_out"
                 scope={scope} setScope={setScope} />
             <CalculatorInputField
-                label={["Min I", <sub>out</sub>]}
+                label={<Fragment>Min I<sub>out</sub></Fragment>}
                 name="min_i_out"
                 scope={scope} setScope={setScope} />
             <CalculatorInputField
-                label={["Max V", <sub>pk-pk</sub>]}
+                label={<Fragment>Max V<sub>pk-pk</sub></Fragment>}
                 name="max_v_pkpk"
                 scope={scope} setScope={setScope} />
 
@@ -71,23 +85,23 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
                 <h2>Results</h2>
             </Grid>
             <CalculatorResultField
-                label="Max Duty Cycle"
+                label="Max Duty Cycle (PWM)"
                 equation={max_duty_eq}
                 scope={scope} />
             <CalculatorResultField
-                label="Min Duty Cycle"
+                label="Min Duty Cycle (PWM)"
                 equation={min_duty_eq}
                 scope={scope} />
             <CalculatorResultField
-                label="Min Inductor Size"
+                label="Min Inductor (L) Size"
                 equation={min_inductor_size}
                 scope={scope} />
             <CalculatorResultField
-                label="Peak Inductor Current"
+                label="Peak Inductor (L) Current"
                 equation={`(max_v_in * (${max_duty_eq})) / (freq * (${min_inductor_size}))`}
                 scope={scope} />
             <CalculatorResultField
-                label="Minimum Capacitor"
+                label={<Fragment>Minimum C<sub>out</sub></Fragment>}
                 equation="min_i_out / (max_v_pkpk * freq)"
                 scope={scope} />
         </Grid>
