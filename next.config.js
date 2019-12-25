@@ -2,4 +2,5 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 const withImages = require('next-images')
-module.exports = withImages(withBundleAnalyzer({}))
+const withCSS = require('@zeit/next-css')
+module.exports = withCSS(withImages(withBundleAnalyzer({})))

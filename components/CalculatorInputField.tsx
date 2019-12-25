@@ -1,17 +1,9 @@
-import { ReactElement, useMemo } from "react"
+import { useMemo, ReactNode } from "react"
 import * as mathjs from 'mathjs'
 import React from "react"
-import { Grid, TextField, makeStyles, Theme, createStyles } from "@material-ui/core"
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue } from "../interfaces"
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        textField: {
-            marginTop: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-        },
-    }),
-);
+import { Grid } from "./Grid";
+import { TextField } from "./TextField";
 
 export function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
     try {
@@ -35,16 +27,14 @@ export function parseInput(input: string, acceptedUnit: string): UnitFieldValue 
 }
 
 export const CalculatorInputField: React.FunctionComponent<{
-    label: ReactElement | string | Array<ReactElement | string>,
-    desc?: ReactElement | string | Array<ReactElement | string>,
+    label: ReactNode,
+    desc?: ReactNode,
     name: string,
     scope: { [name: string]: UnitFieldValue },
     setScope: React.Dispatch<React.SetStateAction<any>>
 }> = ({ label, name, desc, scope, setScope }) => {
     const fieldValue = scope[name]
     const isError = fieldValue.isError()
-
-    const classes = useStyles();
 
     const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useMemo(() => (event) => {
         setScope({
@@ -53,18 +43,16 @@ export const CalculatorInputField: React.FunctionComponent<{
         })
     }, [setScope, scope])
 
-    const helpText = isError ?
+    const error = isError ?
         (fieldValue as InvalidUnitFieldValue).error :
-        desc
+        false
 
     return (
-        <Grid item xs={12}>
+        <Grid item col={12} className="py-1">
             <TextField
-                className={classes.textField}
-                fullWidth
-                error={isError}
+                error={error}
                 label={label}
-                helperText={helpText}
+                helperText={desc}
                 value={fieldValue.textValue}
                 onChange={onChangeHandler} />
         </Grid>)

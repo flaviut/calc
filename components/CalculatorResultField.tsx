@@ -1,15 +1,18 @@
 import * as mathjs from 'mathjs'
-import React, { ReactElement } from "react"
-import { Grid } from "@material-ui/core"
+import React, { ReactNode, useMemo } from "react"
 
 import { ValidUnitFieldValue, UnitFieldValue } from "../interfaces"
+import { Grid } from './Grid'
+import { FieldHelpText } from './FieldHelpText'
+import { uniqueId } from 'lodash'
 
 export const CalculatorResultField: React.FunctionComponent<{
-    label: ReactElement | string | Array<ReactElement | string>,
+    label: ReactNode,
+    desc?: ReactNode,
     equation: string,
     scope: { [name: string]: UnitFieldValue },
     equations?: { [name: string]: string },
-}> = ({ label, equation, scope, equations }) => {
+}> = ({ label, equation, scope, equations, desc }) => {
 
     const fullScope = { ...scope, ...(equations || {}) }
 
@@ -34,18 +37,32 @@ export const CalculatorResultField: React.FunctionComponent<{
         }), {})
 
     let fieldValue = "undef"
+    let isError = true
     try {
         fieldValue = mathjs.evaluate(equation, valueScope)
         fieldValue = fieldValue.toString()
         // parse and format again. There's some kind of flag in the unit object
         // that prevents the prefix from being re-interpreted otherwise
         fieldValue = mathjs.unit(fieldValue).format({ precision: 3 })
+        isError = false
     } catch (err) {
         fieldValue = `Undefined: ${err.message}`
     }
+    
+    const fieldId = useMemo(() => uniqueId('tfot'), [])
 
-    return (<React.Fragment>
-        <Grid item xs={8}>{label}</Grid>
-        <Grid item xs={4}>{fieldValue}</Grid>
-    </React.Fragment>)
+    return (
+        <Grid item col={12} className="py-1">
+            <form className="form-horizontal">
+                <div className={"form-group " + (isError ? "has-error" : "")}>
+                    <Grid col={4} sm={12}>
+                        <label className="form-label" htmlFor={fieldId}>{label}</label>
+                    </Grid>
+                    <Grid col={8} sm={12} className="text-right">
+                        <span id={fieldId}>{fieldValue}</span>
+                    </Grid>
+                    <FieldHelpText text={desc} />
+                </div>
+            </form>
+        </Grid>)
 }
