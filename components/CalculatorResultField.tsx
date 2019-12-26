@@ -48,21 +48,18 @@ export const CalculatorResultField: React.FunctionComponent<{
     } catch (err) {
         fieldValue = `Undefined: ${err.message}`
     }
-    
+
     const fieldId = useMemo(() => uniqueId('tfot'), [])
 
-    return (
-        <Grid item col={12} className="py-1">
-            <form className="form-horizontal">
-                <div className={"form-group " + (isError ? "has-error" : "")}>
-                    <Grid col={4} sm={12}>
-                        <label className="form-label" htmlFor={fieldId}>{label}</label>
-                    </Grid>
-                    <Grid col={8} sm={12} className="text-right">
-                        <span id={fieldId}>{fieldValue}</span>
-                    </Grid>
-                    <FieldHelpText text={desc} />
-                </div>
-            </form>
-        </Grid>)
+    return (<form className="form-horizontal">
+        <div className={"form-group " + (isError ? "has-error" : "")}>
+            <Grid col={4} sm={12}>
+                <label className="form-label" htmlFor={fieldId}>{label}</label>
+            </Grid>
+            <Grid col={8} sm={12} className="text-right">
+                <span id={fieldId}>{fieldValue}</span>
+            </Grid>
+            <FieldHelpText text={desc} />
+        </div>
+    </form>)
 }

@@ -2,15 +2,19 @@ import * as React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import '../public/static/all.css'
+import '../public/static/all.scss'
+import { Grid } from './Grid'
 
 const NavBar: React.FunctionComponent = () => (
-  <nav className="sidebar-wrapper">
-    <div className="sidebar-body">
-      <Link href="/"><a>flaviutamas.com</a></Link>{" "}
-      <Link href="/dcdc"><a>DC/DC</a></Link>
-    </div>
-  </nav>)
+  <header className="navbar" style={{
+  }}>
+    <section className="navbar-section">
+      <Link href="/"><a className="btn btn-link">flaviutamas.com</a></Link>{" "}
+    </section>
+    <section className="navbar-section">
+      <Link href="/calc"><a className="btn btn-link">calc</a></Link>{" "}
+    </section>
+  </header>)
 
 const Footer: React.FunctionComponent = () => (
   <footer>
@@ -34,12 +38,10 @@ const Layout: React.FunctionComponent<Props> = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <NavBar />
 
-      <main className="columns container grid-lg">
-        <div className="column col-12">
-          <h1>{title}</h1>
-        </div>
+      <main className="columns container grid-lg center">
+        <Grid item col={12}><NavBar /></Grid>
+        <Grid item col={12}><h1>{title}</h1></Grid>
         {children}
       </main>
 

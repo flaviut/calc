@@ -2,7 +2,6 @@ import { useMemo, ReactNode } from "react"
 import * as mathjs from 'mathjs'
 import React from "react"
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue } from "../interfaces"
-import { Grid } from "./Grid";
 import { TextField } from "./TextField";
 
 export function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
@@ -47,13 +46,10 @@ export const CalculatorInputField: React.FunctionComponent<{
         (fieldValue as InvalidUnitFieldValue).error :
         false
 
-    return (
-        <Grid item col={12} className="py-1">
-            <TextField
-                error={error}
-                label={label}
-                helperText={desc}
-                value={fieldValue.textValue}
-                onChange={onChangeHandler} />
-        </Grid>)
+    return (<TextField
+        error={error}
+        label={label}
+        helperText={desc}
+        value={fieldValue.textValue}
+        onChange={onChangeHandler} />)
 }
