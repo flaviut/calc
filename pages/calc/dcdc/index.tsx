@@ -1,12 +1,9 @@
 import * as React from 'react'
 import { useState, Fragment } from 'react'
-import Grid from '@material-ui/core/Grid'
-import Layout from '../../../components/Layout'
+import Post from '../../../components/Post'
 import { parseInput, CalculatorInputField } from '../../../components/CalculatorInputField'
 import { CalculatorResultField } from '../../../components/CalculatorResultField'
 import { CalculatorHelpBase } from '../../../components/CalculatorHelpBase'
-
-
 
 const DcDcCalculatorPage: React.FunctionComponent = () => {
     const [scope, setScope] = useState({
@@ -30,24 +27,24 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
 
     const min_inductor_size = `(${duty_eq}) * min_v_in * (1 - (${duty_eq})) / (freq * 2 * min_i_out)`
 
-    return <Layout title="Boost Converter Calculator">
-        <Grid container item sm={6} xs={12}>
-            <Grid item xs={12}>
+    return <Post title="Boost Converter Calculator">
+        <div className="column col-6 col-sm-12"><div className="columns">
+            <div className="column col-12">
                 <img src={require("./boost.svg")}
                     alt="Circuit diagram of a boost converter" />
-            </Grid>
-            <Grid item xs={12}>
+            </div>
+            <div className="column col-12">
                 <p> This calculator provides assistance when designing a boost
-                    regulator. The equations here are derived from&nbsp;
+                regulator. The equations here are derived from&nbsp;
                     <a href="https://www.ti.com/lit/an/slva372c/slva372c.pdf">
                         TI's "Basic Calculation of a Boost Converter's Power
                         Stage", SLVA372C</a>.
                 </p>
                 <CalculatorHelpBase />
-            </Grid>
-        </Grid>
-        <Grid container item sm={6} xs={12}>
-            <Grid item xs={12}><h2>Maximum Switch Current</h2></Grid>
+            </div>
+        </div></div>
+        <div className="column col-6 col-sm-12">
+            <h2>Maximum Switch Current</h2>
             <CalculatorInputField
                 label="Efficiency (η)"
                 desc="Estimated efficiency of the converter"
@@ -83,7 +80,7 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
                 equation={inductor_ripple_current}
                 scope={scope} />
 
-            <Grid item xs={12}><h2>Inductor Selection</h2></Grid>
+            <h2>Inductor Selection</h2>
             <CalculatorInputField
                 label={<Fragment>Typ V<sub>in</sub></Fragment>}
                 name="typ_v_in"
@@ -109,9 +106,9 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
                 scope={scope} />
 
 
-            <Grid item xs={12}><h3>Input Parameters</h3></Grid>
+            <h3>Input Parameters</h3>
 
-            <Grid item xs={12}><h3>Output Parameters</h3></Grid>
+            <h3>Output Parameters</h3>
 
             <CalculatorInputField
                 label={<Fragment>Max V<sub>in</sub></Fragment>}
@@ -128,9 +125,7 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
                 scope={scope} setScope={setScope} />
 
 
-            <Grid item xs={12}>
-                <h2>Results</h2>
-            </Grid>
+            <h2>Results</h2>
             <CalculatorResultField
                 label="Min Inductor (L) Size"
                 equation={min_inductor_size}
@@ -143,8 +138,8 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
                 label={<Fragment>Minimum C<sub>out</sub></Fragment>}
                 equation="min_i_out / (max_v_pkpk * freq)"
                 scope={scope} />
-        </Grid>
-    </Layout>
+        </div>
+    </Post>
 }
 
 export default DcDcCalculatorPage

@@ -1,6 +1,5 @@
 import * as mathjs from 'mathjs'
 import React, { ReactElement } from "react"
-import { Grid } from "@material-ui/core"
 
 import { ValidUnitFieldValue, UnitFieldValue } from "../interfaces"
 
@@ -45,7 +44,7 @@ export const CalculatorResultField: React.FunctionComponent<{
     }
 
     return (<React.Fragment>
-        <Grid item xs={8}>{label}</Grid>
-        <Grid item xs={4}>{fieldValue}</Grid>
+        <div className="column col-8">{label}</div>
+        <div className="column col-4">{fieldValue}</div>
     </React.Fragment>)
 }

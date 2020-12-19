@@ -1,17 +1,8 @@
 import { ReactElement, useMemo } from "react"
 import * as mathjs from 'mathjs'
 import React from "react"
-import { Grid, TextField, makeStyles, Theme, createStyles } from "@material-ui/core"
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue } from "../interfaces"
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        textField: {
-            marginTop: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-        },
-    }),
-);
+import { useRandomSlug } from "../utils";
 
 export function parseInput(input: string, acceptedUnit: string): UnitFieldValue {
     try {
@@ -44,8 +35,6 @@ export const CalculatorInputField: React.FunctionComponent<{
     const fieldValue = scope[name]
     const isError = fieldValue.isError()
 
-    const classes = useStyles();
-
     const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useMemo(() => (event) => {
         setScope({
             ...scope,
@@ -53,19 +42,21 @@ export const CalculatorInputField: React.FunctionComponent<{
         })
     }, [setScope, scope])
 
+    const inputId = useRandomSlug()
+
     const helpText = isError ?
         (fieldValue as InvalidUnitFieldValue).error :
         desc
 
     return (
-        <Grid item xs={12}>
-            <TextField
-                className={classes.textField}
-                fullWidth
-                error={isError}
-                label={label}
-                helperText={helpText}
+        <div className={`form-group
+                         my-1
+                         ${isError ? "has-error" : ""}`}>
+            <label className="form-label" htmlFor={inputId}>{label}</label>
+            <input className="form-input" type="text"
+                id={inputId}
                 value={fieldValue.textValue}
-                onChange={onChangeHandler} />
-        </Grid>)
+                onChange={onChangeHandler}></input>
+            <p className="form-input-hint">{helpText}</p>
+        </div>)
 }
