@@ -34,7 +34,6 @@ const Layout: React.FunctionComponent<Props> = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-
       <main className="columns container grid-lg center">
         <Grid item col={12}><NavBar /></Grid>
         <Grid item col={12}><h1>{title}</h1></Grid>
