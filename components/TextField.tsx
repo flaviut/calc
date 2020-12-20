@@ -8,7 +8,8 @@ interface TextFieldProps {
     label: ReactNode
     helperText?: ReactNode
     value: string
-    onChange?: React.ChangeEventHandler<HTMLInputElement>
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+    rows: number | null
 }
 export const TextField: React.FunctionComponent<TextFieldProps> = (props) => {
 
@@ -25,10 +26,17 @@ export const TextField: React.FunctionComponent<TextFieldProps> = (props) => {
                 <label className="form-label" htmlFor={fieldId}>{props.label}</label>
             </Grid>
             <Grid col={8} sm={12}>
-                <input id={fieldId}
-                    value={props.value}
-                    className="form-input"
-                    onChange={props.onChange} /></Grid>
+                {props.rows != null ?
+                    <textarea id={fieldId}
+                        value={props.value}
+                        className="form-input"
+                        onChange={props.onChange}
+                        rows={props.rows} /> :
+                    <input id={fieldId}
+                        value={props.value}
+                        className="form-input"
+                        onChange={props.onChange} />
+                }</Grid>
             {elError}
             <FieldHelpText text={props.helperText} />
         </div>

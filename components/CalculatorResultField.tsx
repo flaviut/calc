@@ -2,15 +2,18 @@ import React, { ReactNode, useMemo } from "react"
 import uniqueId from "lodash/uniqueId"
 
 import mathjs from '../utils/mathjs'
-import { ValidUnitFieldValue, UnitFieldValue } from "../interfaces"
+import { UnitFieldValue, GenericScope } from "../interfaces"
 import { Grid } from './Grid'
 import { FieldHelpText } from './FieldHelpText'
+import { presentUnit } from "../utils/mathjsTools"
+
+export interface ValueScope { [name: string]: number | mathjs.Unit | number[] | mathjs.Unit[] }
 
 export const CalculatorResultField: React.FunctionComponent<{
     label: ReactNode,
     desc?: ReactNode,
-    equation: string,
-    scope: { [name: string]: UnitFieldValue },
+    equation: string | ((param: ValueScope) => string | number | mathjs.MathArray | mathjs.Matrix),
+    scope: GenericScope,
     equations?: { [name: string]: string },
 }> = ({ label, equation, scope, equations, desc }) => {
 
@@ -21,8 +24,8 @@ export const CalculatorResultField: React.FunctionComponent<{
             return value;
         }
 
-        if (!value.isError()) {
-            return (value as ValidUnitFieldValue).value
+        if (!value.isError) {
+            return value.value
         }
 
         return undefined
@@ -30,7 +33,7 @@ export const CalculatorResultField: React.FunctionComponent<{
 
     // map each field in the state to a simple number (or undefined)
     // this is so that we can use it to evaluate the field value
-    const valueScope: { [name: string]: mathjs.Unit } =
+    const valueScope: ValueScope =
         Object.keys(fullScope).reduce((p, c) => ({
             ...p,
             [c]: flattenFullScopeValue(fullScope[c])
@@ -39,11 +42,14 @@ export const CalculatorResultField: React.FunctionComponent<{
     let fieldValue = "undef"
     let isError = true
     try {
-        fieldValue = mathjs.evaluate(equation, valueScope)
-        fieldValue = fieldValue.toString()
+        if (typeof equation === "function") {
+            fieldValue = equation(valueScope).toString()
+        } else {
+            fieldValue = mathjs.evaluate(equation, valueScope).toString()
+        }
         // parse and format again. There's some kind of flag in the unit object
         // that prevents the prefix from being re-interpreted otherwise
-        fieldValue = mathjs.unit(fieldValue).format({ precision: 3 })
+        fieldValue = presentUnit(fieldValue)
         isError = false
     } catch (err) {
         fieldValue = `Undefined: ${err.message}`

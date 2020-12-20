@@ -86,8 +86,14 @@ import {
     piDependencies,
     tauDependencies,
     trueDependencies,
-    versionDependencies
+    versionDependencies,
+    equalDependencies,
+    smallerDependencies,
+    smallerEqDependencies,
+    largerDependencies,
+    largerEqDependencies,
 } from "mathjs"
+
 
 const mathjs = create({
     cloneDependencies,
@@ -176,7 +182,11 @@ const mathjs = create({
     piDependencies,
     tauDependencies,
     trueDependencies,
-    versionDependencies
-},
-    {})
+    versionDependencies,
+    equalDependencies,
+    smallerDependencies,
+    smallerEqDependencies,
+    largerDependencies,
+    largerEqDependencies,
+}, {})
 export default mathjs

@@ -18,13 +18,15 @@ export class InvalidUnitFieldValue {
         public readonly textValue: string,
         public readonly acceptedUnit: string,
         public readonly error: string) { }
-    isError(): boolean { return true }
+    public readonly isError = true
 }
 
 export class ValidUnitFieldValue {
     constructor(
         public readonly textValue: string,
         public readonly acceptedUnit: string,
-        public readonly value: number | mathjs.Unit) { }
-    isError(): boolean { return false }
+        public readonly value: number | mathjs.Unit | mathjs.Matrix) { }
+    public readonly isError = false
 }
+
+export interface GenericScope { [name: string]: UnitFieldValue }
