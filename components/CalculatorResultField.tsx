@@ -59,6 +59,8 @@ const CalculatorResultField: React.FunctionComponent<{
     fieldValue = presentUnit(fieldValue);
     isError = false;
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err, { equation, fieldValue });
     fieldValue = `Undefined: ${err.message}`;
   }
 
