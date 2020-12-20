@@ -166,6 +166,14 @@ const VoltageDividerPage: FunctionComponent = () => {
     [setScope]
   );
 
+  const customEntryUpdated = useCallback(
+    (newScope: GenericScope) => {
+      updateResistors(newScope);
+      setSelectedSeries("custom");
+    },
+    [updateResistors]
+  );
+
   return (
     <Layout title="Voltage Divider Calculator">
       <Grid item col={12}>
@@ -227,7 +235,9 @@ const VoltageDividerPage: FunctionComponent = () => {
               {Object.keys(eSeries).map((key) => (
                 <button
                   type="button"
-                  className={`btn ${selectedSeries === key && "active"}`}
+                  className={`btn ${
+                    selectedSeries.toString() === key && "active"
+                  }`}
                   key={key}
                   onClick={() =>
                     updateSeries(
@@ -248,7 +258,7 @@ const VoltageDividerPage: FunctionComponent = () => {
               name="resistor_values"
               scope={scope}
               setScope={setScope}
-              onChange={updateResistors}
+              onChange={customEntryUpdated}
               rows={12}
             />
           </ColumnSection>
