@@ -1,5 +1,5 @@
-import { useMemo, ReactNode } from "react"
-import React from "react"
+import React, { useMemo, ReactNode } from "react"
+
 
 import mathjs from '../utils/mathjs'
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue, GenericScope } from "../interfaces"
@@ -24,16 +24,16 @@ export function parseInput(input: string, acceptedUnit: string): UnitFieldValue 
             if (err) { return err }
 
             return new ValidUnitFieldValue(input, acceptedUnit, parsedUnit)
-        } else if (mathjs.typeOf(parsedUnit) === "Unit") {
+        } if (mathjs.typeOf(parsedUnit) === "Unit") {
             return new ValidUnitFieldValue(input, acceptedUnit, parsedUnit.to(acceptedUnit))
-        } else if (mathjs.typeOf(parsedUnit) === "Matrix" && acceptedUnit.endsWith("[]")) {
+        } if (mathjs.typeOf(parsedUnit) === "Matrix" && acceptedUnit.endsWith("[]")) {
             return new ValidUnitFieldValue(
                 input, acceptedUnit, parsedUnit
                     .map((el: any) => el.to(acceptedUnit.substr(0, acceptedUnit.length - 2))))
-        } else {
+        } 
             return new InvalidUnitFieldValue(input, acceptedUnit,
                 `Unrecognized value of kind ${mathjs.typeOf(parsedUnit)} entered into field`)
-        }
+        
 
     } catch (error) {
         return new InvalidUnitFieldValue(input, acceptedUnit, error.message)
@@ -67,11 +67,14 @@ export const CalculatorInputField: React.FunctionComponent<{
         fieldValue.error :
         false
 
-    return (<TextField
+    return (
+      <TextField
         error={error}
         label={label}
         helperText={desc}
         value={fieldValue.textValue}
         onChange={onChangeHandler}
-        rows={rows} />)
+        rows={rows}
+      />
+)
 }

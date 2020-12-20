@@ -14,7 +14,7 @@ interface GridProps {
 
 function addSizeClass(props: GridProps, name: keyof GridProps, classes: string) {
     if (props[name]) {
-        return classes + `col-${name}-${props[name]} `
+        return `${classes  }col-${name}-${props[name]} `
     }
     return classes
 }
@@ -30,12 +30,14 @@ export const Grid: React.FunctionComponent<GridProps> = (props) => {
     if (props.col) {
         classes += `col-${props.col} `
     }
-    for (let size of ['xs', 'sm', 'md', 'lg', 'xl'] as Array<keyof GridProps>) {
+    for (const size of ['xs', 'sm', 'md', 'lg', 'xl'] as Array<keyof GridProps>) {
         classes = addSizeClass(props, size, classes)
     }
 
-    return <div className={classes.trim()}>
+    return (
+      <div className={classes.trim()}>
         {props.children}
-    </div>
+      </div>
+)
 }
 

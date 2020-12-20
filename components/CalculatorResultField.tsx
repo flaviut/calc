@@ -57,15 +57,17 @@ export const CalculatorResultField: React.FunctionComponent<{
 
     const fieldId = useMemo(() => uniqueId('tfot'), [])
 
-    return (<form className="form-horizontal">
-        <div className={"form-group " + (isError ? "has-error" : "")}>
-            <Grid col={4} sm={12}>
-                <label className="form-label" htmlFor={fieldId}>{label}</label>
-            </Grid>
-            <Grid col={8} sm={12} className="text-right">
-                <span id={fieldId}>{fieldValue}</span>
-            </Grid>
-            <FieldHelpText text={desc} />
+    return (
+      <form className="form-horizontal">
+        <div className={`form-group ${  isError ? "has-error" : ""}`}>
+          <Grid col={4} sm={12}>
+            <label className="form-label" htmlFor={fieldId}>{label}</label>
+          </Grid>
+          <Grid col={8} sm={12} className="text-right">
+            <span id={fieldId}>{fieldValue}</span>
+          </Grid>
+          <FieldHelpText text={desc} />
         </div>
-    </form>)
+      </form>
+)
 }

@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { useState, Fragment } from 'react'
 
+import { evaluate } from 'mathjs'
+import { parse } from 'querystring'
 import mathjs from '../../utils/mathjs'
 import Layout from '../../components/Layout'
 import { parseInput, CalculatorInputField } from '../../components/CalculatorInputField'
 import { CalculatorResultField, ValueScope } from '../../components/CalculatorResultField'
 import { CalculatorHelpBase } from '../../components/CalculatorHelpBase'
 import { CalcRow } from '../../components/CalcRow'
-import { evaluate } from 'mathjs'
 import { GenericScope } from '../../interfaces'
-import { parse } from 'querystring'
 import { presentUnit } from '../../utils/mathjsTools'
 
 const eSeries = {
@@ -128,87 +128,110 @@ const VoltageDividerPage: React.FunctionComponent = () => {
     }, [setScope])
 
 
-    return <Layout title="Voltage Divider Calculator">
+    return (
+      <Layout title="Voltage Divider Calculator">
         <CalcRow>
-            <p>This calculator provides assistance for designing a voltage
-                divider, either with a common <a href="">E-series of
-                preferred numbers</a> or with the set of resistors you already
-                have in your parts bin.</p>
-            <CalculatorHelpBase />
+          <p>This calculator provides assistance for designing a voltage
+            divider, either with a common <a href="">E-series of
+              preferred numbers
+            </a> or with the set of resistors you already
+            have in your parts bin.
+          </p>
+          <CalculatorHelpBase />
         </CalcRow>
         <CalcRow>
-            <h2>Allowed Resistors</h2>
+          <h2>Allowed Resistors</h2>
 
-            <h3>E-series</h3>
+          <h3>E-series</h3>
 
-            <p>Select parameters for the resistors that the calculator will be
+          <p>Select parameters for the resistors that the calculator will be
             allowed to use. Modifying values here will replace the contents of
-            the custom resistor entry field below.</p>
+            the custom resistor entry field below.
+          </p>
 
-            <CalculatorInputField
-                label={<Fragment>R<sub>min</sub></Fragment>}
-                name="r_min"
-                desc="Maximum value of each resistor"
-                scope={scope} setScope={setScope}
-                onChange={React.useCallback((newScope) =>
+          <CalculatorInputField
+            label={<>R<sub>min</sub></>}
+            name="r_min"
+            desc="Maximum value of each resistor"
+            scope={scope}
+            setScope={setScope}
+            onChange={React.useCallback((newScope) =>
                     updateSeries(selectedSeries as keyof typeof eSeries, newScope),
-                    [updateSeries, selectedSeries])} />
-            <CalculatorInputField
-                label={<Fragment>R<sub>max</sub></Fragment>}
-                name="r_max"
-                desc="Minimum value of each resistor"
-                scope={scope} setScope={setScope}
-                onChange={React.useCallback((newScope) =>
+                    [updateSeries, selectedSeries])}
+          />
+          <CalculatorInputField
+            label={<>R<sub>max</sub></>}
+            name="r_max"
+            desc="Minimum value of each resistor"
+            scope={scope}
+            setScope={setScope}
+            onChange={React.useCallback((newScope) =>
                     updateSeries(selectedSeries as keyof typeof eSeries, newScope),
-                    [updateSeries, selectedSeries])} />
-            <div className="btn-group btn-group-block">
-                {Object.keys(eSeries)
-                    .map((key) => <button
+                    [updateSeries, selectedSeries])}
+          />
+          <div className="btn-group btn-group-block">
+            {Object.keys(eSeries)
+                    .map((key) => (
+                      <button
                         className={`btn ${selectedSeries == key && 'active'}`}
                         key={key}
                         onClick={React.useCallback(() =>
                             updateSeries(Number.parseInt(key) as keyof typeof eSeries, scope),
                             [updateSeries, key, scope])}
-                    >E{key}</button>)}
-            </div>
+                      >E{key}
+                      </button>
+))}
+          </div>
 
-            <h3>Custom Entry</h3>
+          <h3>Custom Entry</h3>
 
-            <CalculatorInputField
-                label={<Fragment>Resistor Values</Fragment>}
-                name="resistor_values"
-                scope={scope} setScope={setScope}
-                onChange={updateResistors}
-                rows={12} />
+          <CalculatorInputField
+            label={<>Resistor Values</>}
+            name="resistor_values"
+            scope={scope}
+            setScope={setScope}
+            onChange={updateResistors}
+            rows={12}
+          />
 
         </CalcRow>
         <CalcRow>
-            <h2>Divider Parameters</h2>
-            <p>Select the parameters for your voltage divider. You may change
+          <h2>Divider Parameters</h2>
+          <p>Select the parameters for your voltage divider. You may change
             any of the fields, and the rest of the fields will update with
-            the correct values</p>
-            <CalculatorInputField
-                label={<Fragment>V<sub>in</sub></Fragment>}
-                name="v_in"
-                scope={scope} setScope={setScope}
-                onChange={updateResistors} />
-            <CalculatorInputField
-                label={<Fragment>V<sub>out</sub></Fragment>}
-                name="v_out"
-                scope={scope} setScope={setScope}
-                onChange={updateResistors} />
-            <CalculatorInputField
-                label={<Fragment>R<sub>1</sub></Fragment>}
-                name="r1"
-                scope={scope} setScope={setScope}
-                onChange={updateVout} />
-            <CalculatorInputField
-                label={<Fragment>R<sub>2</sub></Fragment>}
-                name="r2"
-                scope={scope} setScope={setScope}
-                onChange={updateVout} />
+            the correct values
+          </p>
+          <CalculatorInputField
+            label={<>V<sub>in</sub></>}
+            name="v_in"
+            scope={scope}
+            setScope={setScope}
+            onChange={updateResistors}
+          />
+          <CalculatorInputField
+            label={<>V<sub>out</sub></>}
+            name="v_out"
+            scope={scope}
+            setScope={setScope}
+            onChange={updateResistors}
+          />
+          <CalculatorInputField
+            label={<>R<sub>1</sub></>}
+            name="r1"
+            scope={scope}
+            setScope={setScope}
+            onChange={updateVout}
+          />
+          <CalculatorInputField
+            label={<>R<sub>2</sub></>}
+            name="r2"
+            scope={scope}
+            setScope={setScope}
+            onChange={updateVout}
+          />
         </CalcRow>
-    </Layout >
+      </Layout>
+)
 }
 
 export default VoltageDividerPage

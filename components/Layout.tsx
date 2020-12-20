@@ -10,14 +10,16 @@ const NavBar: React.FunctionComponent = () => (
       <Link href="/"><a className="navbar-brand mr-2">flaviutamas.com</a></Link>
       <Link href="/calc"><a className="btn btn-link">calc</a></Link>
     </section>
-  </header>)
+  </header>
+)
 
 const Footer: React.FunctionComponent = () => (
   <footer>
     © 2020 Flaviu Tamas,{" "}
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a> or{" "}
     <a href="http://www.apache.org/licenses/LICENSE-2.0" rel="license">Apache 2.0</a>
-  </footer>)
+  </footer>
+)
 
 type Props = {
   title?: string
@@ -27,21 +29,21 @@ const Layout: React.FunctionComponent<Props> = ({
   children,
   title = 'This is the default title',
 }) => (
-    <React.Fragment>
-      <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+  <>
+    <Head>
+      <title>{title}</title>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    </Head>
 
-      <main className="columns container grid-lg center">
-        <Grid item col={12}><NavBar /></Grid>
-        <Grid item col={12}><h1>{title}</h1></Grid>
-        {children}
-      </main>
+    <main className="columns container grid-lg center">
+      <Grid item col={12}><NavBar /></Grid>
+      <Grid item col={12}><h1>{title}</h1></Grid>
+      {children}
+    </main>
 
-      <Footer />
-    </React.Fragment>
+    <Footer />
+  </>
   )
 
 export default Layout
