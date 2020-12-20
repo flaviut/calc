@@ -1,10 +1,10 @@
-import * as mathjs from 'mathjs'
 import React, { ReactNode, useMemo } from "react"
+import uniqueId from "lodash/uniqueId"
 
+import mathjs from '../utils/mathjs'
 import { ValidUnitFieldValue, UnitFieldValue } from "../interfaces"
 import { Grid } from './Grid'
 import { FieldHelpText } from './FieldHelpText'
-import { uniqueId } from 'lodash'
 
 export const CalculatorResultField: React.FunctionComponent<{
     label: ReactNode,

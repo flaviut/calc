@@ -1,6 +1,6 @@
 import React, { useMemo, ReactNode } from "react"
 import { Grid } from "./Grid"
-import { uniqueId } from "lodash"
+import uniqueId from "lodash/uniqueId"
 import { FieldHelpText } from "./FieldHelpText"
 
 interface TextFieldProps {

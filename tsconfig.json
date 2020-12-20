@@ -19,5 +19,5 @@
     "target": "esnext"
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "@types/**/*.d.ts", "pages/_app.js"]
+  "include": ["**/*.ts", "**/*.tsx", "@types/**/*.d.ts", "pages/_app.js", "utils/mathjs.ks"]
 }

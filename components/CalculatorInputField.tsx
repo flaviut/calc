@@ -1,6 +1,7 @@
 import { useMemo, ReactNode } from "react"
-import * as mathjs from 'mathjs'
 import React from "react"
+
+import mathjs from '../utils/mathjs'
 import { UnitFieldValue, InvalidUnitFieldValue, ValidUnitFieldValue } from "../interfaces"
 import { TextField } from "./TextField";
 

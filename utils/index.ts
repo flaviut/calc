@@ -1,1 +1,1 @@
-export type Dummy = undefined
+export { }

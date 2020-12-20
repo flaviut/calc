@@ -9,7 +9,7 @@
 //   name: string
 // }
 
-import * as mathjs from 'mathjs'
+import mathjs from '../utils/mathjs'
 
 export type UnitFieldValue = InvalidUnitFieldValue | ValidUnitFieldValue
 

@@ -2,4 +2,5 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 const withImages = require('next-images')
-module.exports = withImages(withBundleAnalyzer({}))
+const withSourceMaps = require('@zeit/next-source-maps')
+module.exports = withImages(withBundleAnalyzer(withSourceMaps({})))
