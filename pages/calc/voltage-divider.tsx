@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
+import Image from "next/image";
 
 import mathjs from "../../utils/mathjs";
 import Layout from "../../components/Layout";
@@ -179,7 +180,16 @@ const VoltageDividerPage: FunctionComponent = () => {
       <Grid item col={12}>
         <ColumnText>
           <ColumnSection>
-            <p>
+            <Image
+              // eslint-disable-next-line global-require
+              src={require("./voltage-divider.svg")}
+              alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
+              width={30}
+              height={12.8}
+              layout="responsive"
+              priority
+            />
+            <p className="mt-2">
               This calculator provides assistance for designing a voltage
               divider, either with a common{" "}
               <a href="">E-series of preferred numbers</a> or with the set of
@@ -231,24 +241,26 @@ const VoltageDividerPage: FunctionComponent = () => {
                 [updateSeries, selectedSeries]
               )}
             />
-            <div className="btn-group btn-group-block">
-              {Object.keys(eSeries).map((key) => (
-                <button
-                  type="button"
-                  className={`btn ${
-                    selectedSeries.toString() === key && "active"
-                  }`}
-                  key={key}
-                  onClick={() =>
-                    updateSeries(
-                      Number.parseInt(key, 10) as keyof typeof eSeries,
-                      scope
-                    )
-                  }
-                >
-                  E{key}
-                </button>
-              ))}
+            <div className="form-group">
+              <div className="btn-group btn-group-block">
+                {Object.keys(eSeries).map((key) => (
+                  <button
+                    type="button"
+                    className={`btn ${
+                      selectedSeries.toString() === key && "active"
+                    }`}
+                    key={key}
+                    onClick={() =>
+                      updateSeries(
+                        Number.parseInt(key, 10) as keyof typeof eSeries,
+                        scope
+                      )
+                    }
+                  >
+                    E{key}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <h3>Custom Entry</h3>

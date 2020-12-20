@@ -327,17 +327,6 @@ Wire Wire Line
 	650  2550 650  2500
 Connection ~ 650  2550
 $Comp
-L power:+12V Vin
-U 1 1 5DD46F62
-P 650 2500
-F 0 "Vin" H 650 2650 50  0000 C CNN
-F 1 "+12V" H 665 2673 50  0001 C CNN
-F 2 "" H 650 2500 50  0001 C CNN
-F 3 "" H 650 2500 50  0001 C CNN
-	1    650  2500
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+12V Vout
 U 1 1 5DD46F68
 P 1850 2550
@@ -374,6 +363,80 @@ F 1 "L" V 1399 2750 50  0001 C CNN
 F 2 "" H 1300 2750 50  0001 C CNN
 F 3 "~" H 1300 2750 50  0001 C CNN
 	1    1300 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FDFFD01
+P 1450 3550
+F 0 "#PWR?" H 1450 3300 50  0001 C CNN
+F 1 "GND" H 1455 3377 50  0000 C CNN
+F 2 "" H 1450 3550 50  0001 C CNN
+F 3 "" H 1450 3550 50  0001 C CNN
+	1    1450 3550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 3500 1450 3500
+Wire Wire Line
+	1450 3500 1450 3550
+Wire Wire Line
+	700  3500 650  3500
+Wire Wire Line
+	650  3500 650  3450
+Wire Wire Line
+	1000 3500 1050 3500
+Wire Wire Line
+	1050 3500 1050 3900
+Wire Wire Line
+	1050 3900 1500 3900
+Connection ~ 1050 3500
+Wire Wire Line
+	1050 3500 1100 3500
+Text Label 1500 3900 2    50   ~ 0
+Vout
+$Comp
+L power:+12V Vin
+U 1 1 5DD46F62
+P 650 2500
+F 0 "Vin" H 650 2650 50  0000 C CNN
+F 1 "+12V" H 665 2673 50  0001 C CNN
+F 2 "" H 650 2500 50  0001 C CNN
+F 3 "" H 650 2500 50  0001 C CNN
+	1    650  2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5FDFF45A
+P 1250 3500
+F 0 "R2" V 1365 3500 50  0000 C CNN
+F 1 "R" H 1320 3455 50  0001 L CNN
+F 2 "" V 1180 3500 50  0001 C CNN
+F 3 "~" H 1250 3500 50  0001 C CNN
+	1    1250 3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5FDFE9AA
+P 850 3500
+F 0 "R1" V 965 3500 50  0000 C CNN
+F 1 "R" H 920 3455 50  0001 L CNN
+F 2 "" V 780 3500 50  0001 C CNN
+F 3 "~" H 850 3500 50  0001 C CNN
+	1    850  3500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+12V Vin
+U 1 1 5FE069E1
+P 650 3450
+F 0 "Vin" H 665 3623 50  0000 C CNN
+F 1 "+12V" H 665 3623 50  0001 C CNN
+F 2 "" H 650 3450 50  0001 C CNN
+F 3 "" H 650 3450 50  0001 C CNN
+	1    650  3450
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
