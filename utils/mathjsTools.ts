@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import mathjs from "./mathjs";
 
 export function presentUnit(value: string | number | mathjs.MathArray | mathjs.Matrix, unit?: string): string {

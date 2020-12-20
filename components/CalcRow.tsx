@@ -1,4 +1,9 @@
-import { Grid } from "./Grid";
+import Grid from "./Grid";
 
-export const CalcRow: React.FunctionComponent = ({ children }) =>
-  <Grid item md={12} col={6}>{children}</Grid>
+const CalcRow: React.FunctionComponent = ({ children }) => (
+  <Grid item md={12} col={6}>
+    {children}
+  </Grid>
+);
+
+export default CalcRow;
