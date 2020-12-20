@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useState } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 
 import mathjs from "../../utils/mathjs";
 import Layout from "../../components/Layout";
@@ -6,9 +6,10 @@ import CalculatorInputField, {
   parseInput,
 } from "../../components/CalculatorInputField";
 import CalculatorHelpBase from "../../components/CalculatorHelpBase";
-import CalcRow from "../../components/CalcRow";
 import { GenericScope } from "../../interfaces";
 import { presentUnit } from "../../utils/mathjsTools";
+import { ColumnSection, ColumnText } from "../../components/ColumnText";
+import Grid from "../../components/Grid";
 
 // prettier-ignore
 const eSeries = {
@@ -167,120 +168,133 @@ const VoltageDividerPage: FunctionComponent = () => {
 
   return (
     <Layout title="Voltage Divider Calculator">
-      <CalcRow>
-        <p>
-          This calculator provides assistance for designing a voltage divider,
-          either with a common <a href="">E-series of preferred numbers</a> or
-          with the set of resistors you already have in your parts bin.
-        </p>
-        <CalculatorHelpBase />
-      </CalcRow>
-      <CalcRow>
-        <h2>Allowed Resistors</h2>
+      <Grid item col={12}>
+        <ColumnText>
+          <ColumnSection>
+            <p>
+              This calculator provides assistance for designing a voltage
+              divider, either with a common{" "}
+              <a href="">E-series of preferred numbers</a> or with the set of
+              resistors you already have in your parts bin.
+            </p>
+            <CalculatorHelpBase />
+          </ColumnSection>
 
-        <h3>E-series</h3>
+          <ColumnSection>
+            <h2>Allowed Resistors</h2>
 
-        <p>
-          Select parameters for the resistors that the calculator will be
-          allowed to use. Modifying values here will replace the contents of the
-          custom resistor entry field below.
-        </p>
+            <h3>E-series</h3>
 
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>R<sub>min</sub></>}
-          name="r_min"
-          desc="Maximum value of each resistor"
-          scope={scope}
-          setScope={setScope}
-          onChange={useCallback(
-            (newScope) =>
-              updateSeries(selectedSeries as keyof typeof eSeries, newScope),
-            [updateSeries, selectedSeries]
-          )}
-        />
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>R<sub>max</sub></>}
-          name="r_max"
-          desc="Minimum value of each resistor"
-          scope={scope}
-          setScope={setScope}
-          onChange={useCallback(
-            (newScope) =>
-              updateSeries(selectedSeries as keyof typeof eSeries, newScope),
-            [updateSeries, selectedSeries]
-          )}
-        />
-        <div className="btn-group btn-group-block">
-          {Object.keys(eSeries).map((key) => (
-            <button
-              type="button"
-              className={`btn ${selectedSeries === key && "active"}`}
-              key={key}
-              onClick={() =>
-                updateSeries(
-                  Number.parseInt(key, 10) as keyof typeof eSeries,
-                  scope
-                )
-              }
-            >
-              E{key}
-            </button>
-          ))}
-        </div>
+            <p>
+              Select parameters for the resistors that the calculator will be
+              allowed to use. Modifying values here will replace the contents of
+              the custom resistor entry field below.
+            </p>
 
-        <h3>Custom Entry</h3>
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>R<sub>min</sub></>}
+              name="r_min"
+              desc="Maximum value of each resistor"
+              scope={scope}
+              setScope={setScope}
+              onChange={useCallback(
+                (newScope) =>
+                  updateSeries(
+                    selectedSeries as keyof typeof eSeries,
+                    newScope
+                  ),
+                [updateSeries, selectedSeries]
+              )}
+            />
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>R<sub>max</sub></>}
+              name="r_max"
+              desc="Minimum value of each resistor"
+              scope={scope}
+              setScope={setScope}
+              onChange={useCallback(
+                (newScope) =>
+                  updateSeries(
+                    selectedSeries as keyof typeof eSeries,
+                    newScope
+                  ),
+                [updateSeries, selectedSeries]
+              )}
+            />
+            <div className="btn-group btn-group-block">
+              {Object.keys(eSeries).map((key) => (
+                <button
+                  type="button"
+                  className={`btn ${selectedSeries === key && "active"}`}
+                  key={key}
+                  onClick={() =>
+                    updateSeries(
+                      Number.parseInt(key, 10) as keyof typeof eSeries,
+                      scope
+                    )
+                  }
+                >
+                  E{key}
+                </button>
+              ))}
+            </div>
 
-        <CalculatorInputField
-          label={<>Resistor Values</>}
-          name="resistor_values"
-          scope={scope}
-          setScope={setScope}
-          onChange={updateResistors}
-          rows={12}
-        />
-      </CalcRow>
-      <CalcRow>
-        <h2>Divider Parameters</h2>
-        <p>
-          Select the parameters for your voltage divider. You may change any of
-          the fields, and the rest of the fields will update with the correct
-          values
-        </p>
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>V<sub>in</sub></>}
-          name="v_in"
-          scope={scope}
-          setScope={setScope}
-          onChange={updateResistors}
-        />
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>V<sub>out</sub></>}
-          name="v_out"
-          scope={scope}
-          setScope={setScope}
-          onChange={updateResistors}
-        />
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>R<sub>1</sub></>}
-          name="r1"
-          scope={scope}
-          setScope={setScope}
-          onChange={updateVout}
-        />
-        <CalculatorInputField
-          // prettier-ignore
-          label={<>R<sub>2</sub></>}
-          name="r2"
-          scope={scope}
-          setScope={setScope}
-          onChange={updateVout}
-        />
-      </CalcRow>
+            <h3>Custom Entry</h3>
+
+            <CalculatorInputField
+              label={<>Resistor Values</>}
+              name="resistor_values"
+              scope={scope}
+              setScope={setScope}
+              onChange={updateResistors}
+              rows={12}
+            />
+          </ColumnSection>
+
+          <ColumnSection>
+            <h2>Divider Parameters</h2>
+            <p>
+              Select the parameters for your voltage divider. You may change any
+              of the fields, and the rest of the fields will update with the
+              correct values
+            </p>
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>V<sub>in</sub></>}
+              name="v_in"
+              scope={scope}
+              setScope={setScope}
+              onChange={updateResistors}
+            />
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>V<sub>out</sub></>}
+              name="v_out"
+              scope={scope}
+              setScope={setScope}
+              onChange={updateResistors}
+            />
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>R<sub>1</sub></>}
+              name="r1"
+              scope={scope}
+              setScope={setScope}
+              onChange={updateVout}
+            />
+            <CalculatorInputField
+              // prettier-ignore
+              label={<>R<sub>2</sub></>}
+              name="r2"
+              scope={scope}
+              setScope={setScope}
+              onChange={updateVout}
+            />
+          </ColumnSection>
+        </ColumnText>
+      </Grid>
     </Layout>
   );
 };
