@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { useState, Fragment } from 'react'
+import Image from 'next/image'
+
 import Layout from '../../../components/Layout'
 import { parseInput, CalculatorInputField } from '../../../components/CalculatorInputField'
 import { CalculatorResultField } from '../../../components/CalculatorResultField'
@@ -35,10 +37,11 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
 
     return <Layout title="Buck Converter Power Stage Calculator">
         <CalcRow>
-            <img src={require("./buck.svg")}
-                alt="Circuit diagram of a buck converter" />
+            <Image src={require("./buck.svg")}
+                alt="Circuit diagram of a buck converter"
+                width={40} height={18.6} layout="responsive" priority />
             <p> This calculator provides assistance when designing a buck
-                regulator. The equations here are derived from&nbsp;
+            regulator. The equations here are derived from&nbsp;
                 <a href="https://www.ti.com/lit/an/slva477b/slva477b.pdf">
                     TI's "Basic Calculation of a Buck Converter's Power
                     Stage", SLVA477B</a>. You'll want to be following along
