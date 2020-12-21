@@ -2,20 +2,20 @@ import * as React from "react";
 import { useState } from "react";
 import Image from "next/image";
 
-import Layout from "../../../components/Layout";
+import Layout from "../../../../components/Layout";
 import CalculatorInputField, {
   parseInput,
-} from "../../../components/CalculatorInputField";
-import CalculatorResultField from "../../../components/CalculatorResultField";
-import CalculatorHelpBase from "../../../components/CalculatorHelpBase";
-import Grid from "../../../components/Grid";
-import { ColumnSection, ColumnText } from "../../../components/ColumnText";
+} from "../../../../components/CalculatorInputField";
+import CalculatorResultField from "../../../../components/CalculatorResultField";
+import CalculatorHelpBase from "../../../../components/CalculatorHelpBase";
+import { ColumnSection, ColumnText } from "../../../../components/ColumnText";
+import Grid from "../../../../components/Grid";
 
 const DcDcCalculatorPage: React.FunctionComponent = () => {
   const [scope, setScope] = useState({
-    min_v_in: parseInput("5 V", "V"),
-    v_out: parseInput("12 V", "V"),
-    eff: parseInput("0.8", ""),
+    max_v_in: parseInput("12 V", "V"),
+    v_out: parseInput("3.3 V", "V"),
+    eff: parseInput("0.9", ""),
 
     freq: parseInput("100 kHz", "Hz"),
     l_value: parseInput("33 uH", "H"),
@@ -24,30 +24,29 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
 
     diode_vf: parseInput("200 mV", "V"),
 
-    max_v_in: parseInput("12 V", "V"),
+    min_v_in: parseInput("5 V", "V"),
     typ_v_in: parseInput("8.4 V", "V"),
     min_i_out: parseInput("1 A", "A"),
     max_v_pkpk: parseInput("0.05 V", "V"),
     est_l_ripple_factor: parseInput("0.3", ""),
   });
 
-  const dutyEq = "1 - (min_v_in * eff / v_out)";
-  const inductorRippleCurrent = `(min_v_in * (${dutyEq})) / (freq * l_value)`;
+  const dutyEq = "v_out / (max_v_in * eff)";
+  const inductorRippleCurrent = `((max_v_in - v_out) * (${dutyEq})) / (freq * l_value)`;
 
-  const maxSwitchingCurrent = `((${inductorRippleCurrent})/2) + (max_i_out/(1-(${dutyEq})))`;
+  const maxSwitchingCurrent = `((${inductorRippleCurrent})/2) + max_i_out`;
 
-  const estInductorRippleCurrent =
-    "est_l_ripple_factor * max_i_out * (v_out / typ_v_in)";
+  const estInductorRippleCurrent = "est_l_ripple_factor * max_i_out";
 
   return (
-    <Layout title="Boost Converter Power Stage Calculator">
+    <Layout title="Buck Converter Power Stage Calculator">
       <Grid item col={12}>
         <ColumnText>
           <ColumnSection>
             <Image
               // eslint-disable-next-line global-require
-              src={require("./boost.svg")}
-              alt="Circuit diagram of a boost converter"
+              src={require("./buck.svg")}
+              alt="Circuit diagram of a buck converter"
               width={40}
               height={18.6}
               layout="responsive"
@@ -55,11 +54,11 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
             />
             <p>
               {" "}
-              This calculator provides assistance when designing a boost
+              This calculator provides assistance when designing a buck
               regulator. The equations here are derived from&nbsp;
-              <a href="https://www.ti.com/lit/an/slva372c/slva372c.pdf">
-                TI's "Basic Calculation of a Boost Converter's Power Stage",
-                SLVA372C
+              <a href="https://www.ti.com/lit/an/slva477b/slva477b.pdf">
+                TI's "Basic Calculation of a Buck Converter's Power Stage",
+                SLVA477B
               </a>
               . You'll want to be following along in that document as you fill
               this worksheet out.
@@ -177,7 +176,7 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
             />
             <CalculatorResultField
               label="Suggested Inductor Value"
-              equation={`(typ_v_in * (v_out - typ_v_in)) / ((${estInductorRippleCurrent}) * freq * v_out)`}
+              equation={`(v_out * (typ_v_in - v_out)) / ((${estInductorRippleCurrent}) * freq * typ_v_in)`}
               scope={scope}
             />
             <CalculatorResultField
@@ -214,7 +213,7 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
               label="Diode Power Dissipation"
               equation="max_i_out * diode_vf"
               scope={scope}
-            />
+            />{" "}
           </ColumnSection>
         </ColumnText>
       </Grid>
