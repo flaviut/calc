@@ -23,17 +23,17 @@ jobs:
           path: ${{ github.workspace }}/.next/cache
           key: nextjs
 
-      - name: Install and Build
+      - name: Install
         uses: actions/setup-node@v1
       - run: yarn install --frozen-lockfile
       
       - name: Lint
-      - run: yarn run lint
+        run: yarn run lint
         env:
             CI: true
 
       - name: Build
-      - run: yarn run build
+        run: yarn run build
         env:
             CI: true
 
