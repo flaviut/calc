@@ -5,6 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "prod": "next export",
     "type-check": "tsc",
     "lint": "eslint ./components/** ./pages/** -c .eslintrc.js --ext js,jsx,ts,tsx",
     "lint-fix": "eslint ./components/** ./pages/** -c .eslintrc.js --fix --ext js,jsx,ts,tsx"

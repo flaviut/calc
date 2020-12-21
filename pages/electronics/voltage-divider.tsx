@@ -1,16 +1,16 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
 import Image from "next/image";
 
-import mathjs from "../../../utils/mathjs";
-import Layout from "../../../components/Layout";
+import mathjs from "../../utils/mathjs";
+import Layout from "../../components/Layout";
 import CalculatorInputField, {
   parseInput,
-} from "../../../components/CalculatorInputField";
-import CalculatorHelpBase from "../../../components/CalculatorHelpBase";
-import { GenericScope } from "../../../interfaces";
-import { presentUnit } from "../../../utils/mathjsTools";
-import { ColumnSection, ColumnText } from "../../../components/ColumnText";
-import Grid from "../../../components/Grid";
+} from "../../components/CalculatorInputField";
+import CalculatorHelpBase from "../../components/CalculatorHelpBase";
+import { GenericScope } from "../../interfaces";
+import { presentUnit } from "../../utils/mathjsTools";
+import { ColumnSection, ColumnText } from "../../components/ColumnText";
+import Grid from "../../components/Grid";
 
 // prettier-ignore
 const eSeries = {
@@ -187,6 +187,7 @@ const VoltageDividerPage: FunctionComponent = () => {
               width={30}
               height={12.8}
               layout="responsive"
+              unoptimized
               priority
             />
             <p className="mt-2">

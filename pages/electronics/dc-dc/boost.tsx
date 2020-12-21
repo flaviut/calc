@@ -2,14 +2,14 @@ import * as React from "react";
 import { useState } from "react";
 import Image from "next/image";
 
-import Layout from "../../../../components/Layout";
+import Layout from "../../../components/Layout";
 import CalculatorInputField, {
   parseInput,
-} from "../../../../components/CalculatorInputField";
-import CalculatorResultField from "../../../../components/CalculatorResultField";
-import CalculatorHelpBase from "../../../../components/CalculatorHelpBase";
-import Grid from "../../../../components/Grid";
-import { ColumnSection, ColumnText } from "../../../../components/ColumnText";
+} from "../../../components/CalculatorInputField";
+import CalculatorResultField from "../../../components/CalculatorResultField";
+import CalculatorHelpBase from "../../../components/CalculatorHelpBase";
+import Grid from "../../../components/Grid";
+import { ColumnSection, ColumnText } from "../../../components/ColumnText";
 
 const DcDcCalculatorPage: React.FunctionComponent = () => {
   const [scope, setScope] = useState({
@@ -51,6 +51,7 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
               width={40}
               height={18.6}
               layout="responsive"
+              unoptimized
               priority
             />
             <p>

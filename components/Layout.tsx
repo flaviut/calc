@@ -7,10 +7,10 @@ import Grid from "./Grid";
 const NavBar: React.FunctionComponent = () => (
   <header className="navbar">
     <section className="navbar-section">
+      <a className="navbar-brand mr-2" href="/">
+        flaviutamas.com
+      </a>
       <Link href="/">
-        <a className="navbar-brand mr-2">flaviutamas.com</a>
-      </Link>
-      <Link href="/calc">
         <a className="btn btn-link">calc</a>
       </Link>
     </section>
