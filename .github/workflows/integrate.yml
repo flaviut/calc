@@ -26,14 +26,14 @@ jobs:
       - name: Install
         uses: actions/setup-node@v1
       - run: yarn install --frozen-lockfile
-      
+
       - name: Lint
         run: yarn run lint
         env:
             CI: true
 
       - name: Build
-        run: yarn run build
+        run: yarn run build && yarn run prod
         env:
             CI: true
 
@@ -41,7 +41,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: build # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          BRANCH: gh-pages
+          FOLDER: out
+          CLEAN: true
 
