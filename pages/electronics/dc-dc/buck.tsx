@@ -24,7 +24,6 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
 
     diode_vf: parseInput("200 mV", "V"),
 
-    min_v_in: parseInput("5 V", "V"),
     typ_v_in: parseInput("8.4 V", "V"),
     min_i_out: parseInput("1 A", "A"),
     max_v_pkpk: parseInput("0.05 V", "V"),
@@ -76,9 +75,9 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
             </p>
             <CalculatorInputField
               // prettier-ignore
-              label={<>Min V<sub>in</sub></>}
-              name="min_v_in"
-              desc="Minimum input voltage"
+              label={<>Max V<sub>in</sub></>}
+              name="max_v_in"
+              desc="Maximum input voltage"
               scope={scope}
               setScope={setScope}
             />
