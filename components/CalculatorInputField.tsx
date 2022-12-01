@@ -46,7 +46,7 @@ export function parseInput(
         parsedUnit.to(acceptedUnit)
       );
     }
-    if (mathjs.typeOf(parsedUnit) === "Matrix" && acceptedUnit.endsWith("[]")) {
+    if (mathjs.typeOf(parsedUnit) === "DenseMatrix" && acceptedUnit.endsWith("[]")) {
       return new ValidUnitFieldValue(
         input,
         acceptedUnit,
