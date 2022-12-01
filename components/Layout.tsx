@@ -10,8 +10,8 @@ const NavBar: React.FunctionComponent = () => (
       <a className="navbar-brand mr-2" href="/">
         flaviutamas.com
       </a>
-      <Link href="/">
-        <a className="btn btn-link">calc</a>
+      <Link href="/" className="btn btn-link">
+        calc
       </Link>
     </section>
   </header>

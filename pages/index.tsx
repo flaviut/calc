@@ -8,18 +8,18 @@ const CalculatorIndex: React.FunctionComponent = () => (
       <ul>
         <li>
           <Link href="/electronics/dc-dc/boost">
-            <a>Boost Converters</a>
+            Boost Converters
           </Link>
         </li>
         <li>
           <Link href="/electronics/dc-dc/buck">
-            <a>Buck Converters</a>
+            Buck Converters
           </Link>
         </li>
       </ul>
       <li>
         <Link href="/electronics/voltage-divider">
-          <a>Voltage Divider</a>
+          Voltage Divider
         </Link>
       </li>
     </ul>
