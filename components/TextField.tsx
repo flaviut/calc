@@ -1,17 +1,17 @@
-import React, { useMemo, ReactNode } from "react";
+import React, { useMemo } from "react";
 import uniqueId from "lodash/uniqueId";
 import Grid from "./Grid";
 import FieldHelpText from "./FieldHelpText";
 
 interface TextFieldProps {
-  error?: boolean | ReactNode;
-  label: ReactNode;
-  helperText?: ReactNode;
+  error?: boolean | React.ReactNode;
+  label: React.ReactNode;
+  helperText?: React.ReactNode;
   value: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   rows: number | null;
 }
-const TextField: React.FunctionComponent<TextFieldProps> = ({
+const TextField: React.FC<TextFieldProps> = ({
   error,
   label,
   rows,

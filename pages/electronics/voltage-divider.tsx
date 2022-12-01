@@ -12,6 +12,8 @@ import { presentUnit } from "../../utils/mathjsTools";
 import { ColumnSection, ColumnText } from "../../components/ColumnText";
 import Grid from "../../components/Grid";
 
+import dividerSchematic from "./voltage-divider.svg";
+
 // prettier-ignore
 const eSeries = {
     12: [1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2],
@@ -181,14 +183,12 @@ const VoltageDividerPage: FunctionComponent = () => {
         <ColumnText>
           <ColumnSection>
             <Image
-              // eslint-disable-next-line global-require
-              src={require("./voltage-divider.svg")}
-              alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
-              width={30}
-              height={12.8}
-              layout="responsive"
-              unoptimized
-              priority
+                src={dividerSchematic}
+                alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
+                width={dividerSchematic.width} height={dividerSchematic.height}
+                layout="responsive"
+                unoptimized
+                priority
             />
             <p className="mt-2">
               This calculator provides assistance for designing a voltage
@@ -218,10 +218,10 @@ const VoltageDividerPage: FunctionComponent = () => {
               scope={scope}
               setScope={setScope}
               onChange={useCallback(
-                (newScope) =>
+                (newScope: GenericScope) =>
                   updateSeries(
                     selectedSeries as keyof typeof eSeries,
-                    newScope
+                    newScope as typeof scope
                   ),
                 [updateSeries, selectedSeries]
               )}
@@ -234,10 +234,10 @@ const VoltageDividerPage: FunctionComponent = () => {
               scope={scope}
               setScope={setScope}
               onChange={useCallback(
-                (newScope) =>
+                (newScope: GenericScope) =>
                   updateSeries(
                     selectedSeries as keyof typeof eSeries,
-                    newScope
+                    newScope as typeof scope
                   ),
                 [updateSeries, selectedSeries]
               )}

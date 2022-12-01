@@ -62,15 +62,15 @@ export function parseInput(
         parsedUnit
       )} entered into field`
     );
-  } catch (error) {
-    return new InvalidUnitFieldValue(input, acceptedUnit, error.message);
+  } catch (err) {
+    return new InvalidUnitFieldValue(input, acceptedUnit, err instanceof Error ? err.message : `${err}`);
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const defaultEmptyFun = () => {};
 
-const CalculatorInputField: React.FunctionComponent<{
+const CalculatorInputField: React.FC<{
   label: ReactNode;
   desc?: ReactNode;
   name: string;

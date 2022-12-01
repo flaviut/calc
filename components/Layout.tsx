@@ -31,10 +31,11 @@ const Footer: React.FunctionComponent = () => (
 );
 
 type Props = {
+  children: React.ReactNode;
   title?: string;
 };
 
-const Layout: React.FunctionComponent<Props> = ({
+const Layout: React.FC<Props> = ({
   children,
   title = "This is the default title",
 }) => (

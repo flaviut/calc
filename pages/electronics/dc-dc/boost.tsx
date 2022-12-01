@@ -11,6 +11,8 @@ import CalculatorHelpBase from "../../../components/CalculatorHelpBase";
 import Grid from "../../../components/Grid";
 import { ColumnSection, ColumnText } from "../../../components/ColumnText";
 
+import boostSchematic from "./boost.svg";
+
 const DcDcCalculatorPage: React.FunctionComponent = () => {
   const [scope, setScope] = useState({
     min_v_in: parseInput("5 V", "V"),
@@ -45,11 +47,9 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
         <ColumnText>
           <ColumnSection>
             <Image
-              // eslint-disable-next-line global-require
-              src={require("./boost.svg")}
+              src={boostSchematic}
               alt="Circuit diagram of a boost converter"
-              width={40}
-              height={18.6}
+              width={boostSchematic.width} height={boostSchematic.height}
               layout="responsive"
               unoptimized
               priority

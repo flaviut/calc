@@ -11,6 +11,8 @@ import CalculatorHelpBase from "../../../components/CalculatorHelpBase";
 import { ColumnSection, ColumnText } from "../../../components/ColumnText";
 import Grid from "../../../components/Grid";
 
+import buckSchematic from "./buck.svg";
+
 const DcDcCalculatorPage: React.FunctionComponent = () => {
   const [scope, setScope] = useState({
     max_v_in: parseInput("12 V", "V"),
@@ -43,11 +45,9 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
         <ColumnText>
           <ColumnSection>
             <Image
-              // eslint-disable-next-line global-require
-              src={require("./buck.svg")}
+              src={buckSchematic}
               alt="Circuit diagram of a buck converter"
-              width={40}
-              height={18.6}
+              width={buckSchematic.width} height={buckSchematic.height}
               layout="responsive"
               unoptimized
               priority

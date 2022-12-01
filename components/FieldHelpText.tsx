@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import * as React from "react";
 import Grid from "./Grid";
 
-const FieldHelpText: React.FunctionComponent<{
-  text?: ReactNode;
+const FieldHelpText: React.FC<{
+  text?: React.ReactNode;
 }> = ({ text }) =>
   text ? (
     <Grid sm={12} col={8} className="col-ml-auto">

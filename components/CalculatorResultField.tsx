@@ -11,7 +11,7 @@ export interface ValueScope {
   [name: string]: number | mathjs.Unit | number[] | mathjs.Unit[];
 }
 
-const CalculatorResultField: React.FunctionComponent<{
+const CalculatorResultField: React.FC<{
   label: ReactNode;
   desc?: ReactNode;
   equation:
@@ -61,7 +61,7 @@ const CalculatorResultField: React.FunctionComponent<{
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err, { equation, fieldValue });
-    fieldValue = `Undefined: ${err.message}`;
+    fieldValue = `Undefined: ${err instanceof Error ? err.message : err}`;
   }
 
   const fieldId = useMemo(() => uniqueId("tfot"), []);

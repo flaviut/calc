@@ -1,6 +1,6 @@
 import React from "react";
 
-const CalculatorHelpBase: React.FunctionComponent = () => (
+const CalculatorHelpBase: React.FC = () => (
   <>
     <p>
       This calculator accepts arbitrary units and expressions. For example,{" "}
