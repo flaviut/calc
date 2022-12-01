@@ -1,6 +1,7 @@
 node_modules
 .next
 out
+.idea
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,vim,emacs,intellij,visualstudiocode,kicad
