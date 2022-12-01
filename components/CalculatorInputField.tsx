@@ -46,13 +46,18 @@ export function parseInput(
         parsedUnit.to(acceptedUnit)
       );
     }
-    if (mathjs.typeOf(parsedUnit) === "DenseMatrix" && acceptedUnit.endsWith("[]")) {
+    if (
+      mathjs.typeOf(parsedUnit) === "DenseMatrix" &&
+      acceptedUnit.endsWith("[]")
+    ) {
       return new ValidUnitFieldValue(
         input,
         acceptedUnit,
-        parsedUnit.map((
-          el: mathjs.Unit // TODO: | number
-        ) => el.to(acceptedUnit.substr(0, acceptedUnit.length - 2)))
+        parsedUnit.map(
+          (
+            el: mathjs.Unit // TODO: | number
+          ) => el.to(acceptedUnit.substr(0, acceptedUnit.length - 2))
+        )
       );
     }
     return new InvalidUnitFieldValue(
@@ -63,7 +68,11 @@ export function parseInput(
       )} entered into field`
     );
   } catch (err) {
-    return new InvalidUnitFieldValue(input, acceptedUnit, err instanceof Error ? err.message : `${err}`);
+    return new InvalidUnitFieldValue(
+      input,
+      acceptedUnit,
+      err instanceof Error ? err.message : `${err}`
+    );
   }
 }
 

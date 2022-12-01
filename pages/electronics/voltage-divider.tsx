@@ -183,12 +183,13 @@ const VoltageDividerPage: FunctionComponent = () => {
         <ColumnText>
           <ColumnSection>
             <Image
-                src={dividerSchematic}
-                alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
-                width={dividerSchematic.width} height={dividerSchematic.height}
-                layout="responsive"
-                unoptimized
-                priority
+              src={dividerSchematic}
+              alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
+              width={dividerSchematic.width}
+              height={dividerSchematic.height}
+              layout="responsive"
+              unoptimized
+              priority
             />
             <p className="mt-2">
               This calculator provides assistance for designing a voltage

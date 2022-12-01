@@ -47,7 +47,8 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
             <Image
               src={buckSchematic}
               alt="Circuit diagram of a buck converter"
-              width={buckSchematic.width} height={buckSchematic.height}
+              width={buckSchematic.width}
+              height={buckSchematic.height}
               layout="responsive"
               unoptimized
               priority

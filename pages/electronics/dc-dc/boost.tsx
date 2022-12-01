@@ -49,7 +49,8 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
             <Image
               src={boostSchematic}
               alt="Circuit diagram of a boost converter"
-              width={boostSchematic.width} height={boostSchematic.height}
+              width={boostSchematic.width}
+              height={boostSchematic.height}
               layout="responsive"
               unoptimized
               priority

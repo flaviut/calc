@@ -7,20 +7,14 @@ const CalculatorIndex: React.FunctionComponent = () => (
       <li>DC/DC Converters</li>
       <ul>
         <li>
-          <Link href="/electronics/dc-dc/boost">
-            Boost Converters
-          </Link>
+          <Link href="/electronics/dc-dc/boost">Boost Converters</Link>
         </li>
         <li>
-          <Link href="/electronics/dc-dc/buck">
-            Buck Converters
-          </Link>
+          <Link href="/electronics/dc-dc/buck">Buck Converters</Link>
         </li>
       </ul>
       <li>
-        <Link href="/electronics/voltage-divider">
-          Voltage Divider
-        </Link>
+        <Link href="/electronics/voltage-divider">Voltage Divider</Link>
       </li>
     </ul>
   </Layout>

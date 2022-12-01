@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const ColumnText: React.FC<Props> = ({ children }) => (

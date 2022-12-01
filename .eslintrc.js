@@ -68,9 +68,8 @@ function getExtends(extras = []) {
     "plugin:import/warnings",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended",
-    // always put prettier at last
-    "prettier",
-    "prettier/react",
+
+    "prettier",  // use prettier to format code
   ];
 }
 
