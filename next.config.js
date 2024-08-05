@@ -1,15 +1,17 @@
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
-
-const withSourceMaps = require("@zeit/next-source-maps");
-
-module.exports =  withBundleAnalyzer(
-    withSourceMaps({
-      images: {
-        loader: "imgix",
-        path: "https://example.com/neverused/",
-      },
-      basePath: "/calc",
-    })
-);
+module.exports = withBundleAnalyzer({
+  webpack: (config, options) => {
+    if (options.dev) {
+      config.devtool = "cheap-module-source-map";
+    }
+    return config;
+  },
+  images: {
+    loader: "imgix",
+    path: "https://example.com/neverused/",
+  },
+  basePath: "/calc",
+  reactStrictMode: true,
+});
