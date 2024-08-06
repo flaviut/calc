@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import mathjs from "../../utils/mathjs";
 import Layout from "../../components/Layout";
