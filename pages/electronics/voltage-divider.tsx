@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import mathjs from "../../utils/mathjs";
 import Layout from "../../components/Layout";
@@ -187,10 +187,13 @@ const VoltageDividerPage: FunctionComponent = () => {
               alt="Circuit diagram of a voltage divider converter, with R1 connected to Vin and R2 connected to ground"
               width={dividerSchematic.width}
               height={dividerSchematic.height}
-              layout="responsive"
               unoptimized
               priority
-            />
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto"
+              }} />
             <p className="mt-2">
               This calculator provides assistance for designing a voltage
               divider, either with a common{" "}

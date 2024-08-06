@@ -9,8 +9,8 @@ module.exports = withBundleAnalyzer({
     return config;
   },
   images: {
-    loader: "imgix",
-    path: "https://example.com/neverused/",
+    loader: "custom",
+    loaderFile: "./imgix-loader.js"
   },
   basePath: "/calc",
   reactStrictMode: true,

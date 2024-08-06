@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import Layout from "../../../components/Layout";
 import CalculatorInputField, {
@@ -51,10 +51,13 @@ const DcDcCalculatorPage: React.FunctionComponent = () => {
               alt="Circuit diagram of a boost converter"
               width={boostSchematic.width}
               height={boostSchematic.height}
-              layout="responsive"
               unoptimized
               priority
-            />
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto"
+              }} />
             <p>
               {" "}
               This calculator provides assistance when designing a boost
